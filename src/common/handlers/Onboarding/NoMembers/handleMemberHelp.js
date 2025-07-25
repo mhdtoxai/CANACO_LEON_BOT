@@ -29,8 +29,8 @@ const handleMemberHelp = async (senderId, receivedMessage) => {
 
         // 3. Realizar el backup del usuario
         try {
-            const backupResponse = await axios.post('https://ampi-jhsby.ondigitalocean.app/api/backup', {
-                _id: senderId  // Enviar el _id del usuario para realizar el backup
+            const backupResponse = await axios.post('https://canaco-leon-umihv.ondigitalocean.app/api/backup', {
+                 wa_id: senderId   // Enviar el wa_id del usuario para realizar el backup
             });
 
             console.log('Backup realizado con éxito:', backupResponse.data);

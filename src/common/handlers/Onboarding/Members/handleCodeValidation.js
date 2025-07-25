@@ -38,7 +38,7 @@ const handleCodeValidation = async (senderId, receivedMessage) => {
 
         if (code_attempts >= 3) {
             await userService.updateUser(senderId, { code_attempts: 0 });
-            await sendMessage(senderId, '❌ No he logrado validar el código de verificación. 📞 Por favor comunícate con nuestra asesora Jeimy Esmeralda Galindo Rosas al *+52 1 56 1509 6289*. 📲 Te ayudaremos a recibir tu código o verificar el problema. ✅');
+            await sendMessage(senderId, '❌ No he logrado validar el código de verificación. 📞 Por favor comunícate con nuestros ejecutivos de CANACO León vía whatsapp al +524777142800 para atender tu caso. 📲 Te ayudaremos a recibir tu código o verificar el problema. ✅');
             return;
         }
 

@@ -1,25 +1,29 @@
-const db = require('../database/mongoConfig'); // Importamos la conexión de MongoDB
-const sendMessage = require('../services/Wp-Envio-Msj/sendMessage'); // Importa tu función de envío
+const db = require('../database/mongoConfig');
+const sendMessage = require('../services/Wp-Envio-Msj/sendMessage');
+
+// ID de organización obtenido del entorno (.env)
+const ORGANIZATION_ID = process.env.ORGANIZATION_ID;
 
 async function handleReset(senderId) {
   try {
-    // ✅ Primero, enviar el mensaje al usuario
-    const resetMessage = '¡Perfecto! 🙌 Claro, no hay ningún problema. Volvamos a empezar. Escríbeme cuando quieras para comenzar de nuevo. 😊';
+const resetMessage = '¡Todo listo para volver a empezar! Cuando estés listo, solo mándame un mensaje y comenzamos desde el principio. 😊';
     await sendMessage(senderId, resetMessage);
 
-    // ✅ Pequeño delay para asegurar entrega (opcional pero recomendado)
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // ✅ Ahora sí, borrar el usuario
-    const result = await db.collection('users').deleteOne({ _id: senderId });
+    const result = await db.collection('users').deleteOne({
+      wa_id: senderId,
+      organization_id: ORGANIZATION_ID
+    });
 
     if (result.deletedCount === 1) {
-      console.log(`Registro del usuario ${senderId} borrado correctamente.`);
+      console.log(`✅ Usuario ${senderId} eliminado correctamente.`);
     } else {
-      console.log(`No se encontró el usuario ${senderId} para borrar.`);
+      console.log(`⚠️ Usuario ${senderId} no encontrado para eliminación.`);
     }
+
   } catch (error) {
-    console.error(`Error al borrar el registro del usuario ${senderId}:`, error);
+    console.error(`❌ Error al borrar el usuario ${senderId}:`, error);
   }
 }
 

@@ -22,13 +22,13 @@ const handleAfilation = async (senderId, receivedMessage) => {
 
         // 2️⃣ Luego, enviar mensaje aleatorio con botones para invitar de nuevo
         const retryMessages = [
-            '😊 Nos encantaría que formes parte de la familia AMPI. 🤝 ¿Te gustaría conocer más sobre lo que hacemos? 🏡',
-            '✨ ¡Unirte a AMPI puede ayudarte a crecer como profesional! ¿Quieres saber más? 📈',
-            '🏠 ¿Te gustaría descubrir todos los beneficios de AMPI? Estamos para ayudarte. 🙌',
-            '📈 Con AMPI puedes impulsar tu carrera y acceder a grandes oportunidades. ¿Te interesa saber cómo? 💼',
-            '🎯 Ser parte de AMPI es dar un paso firme hacia tu crecimiento profesional. ¿Quieres más información? 🚀',
-            '🔑 AMPI te conecta con una gran red de profesionales y nuevas oportunidades. ¿Te gustaría saber más? 🤝',
-            '💬 ¡Estamos listos para resolver todas tus dudas sobre AMPI! ¿Te interesa conocer los beneficios? 🌟',
+            '😊 Nos encantaría que formes parte de la familia CANACO LEÓN. 🤝 ¿Te gustaría conocer más sobre lo que hacemos? 🏡',
+            '✨ ¡Unirte a CANACO LEÓN puede ayudarte a crecer como profesional! ¿Quieres saber más? 📈',
+            '🏠 ¿Te gustaría descubrir todos los beneficios de CANACO LEÓN? Estamos para ayudarte. 🙌',
+            '📈 Con CANACO LEÓN puedes impulsar tu carrera y acceder a grandes oportunidades. ¿Te interesa saber cómo? 💼',
+            '🎯 Ser parte de CANACO LEÓN es dar un paso firme hacia tu crecimiento profesional. ¿Quieres más información? 🚀',
+            '🔑 CANACO LEÓN te conecta con una gran red de profesionales y nuevas oportunidades. ¿Te gustaría saber más? 🤝',
+            '💬 ¡Estamos listos para resolver todas tus dudas sobre CANACO LEÓN! ¿Te interesa conocer los beneficios? 🌟',
             '🌟 ¡Estás a un paso de formar parte de la red inmobiliaria más importante! ¿Te gustaría conocer cómo afiliarte? 🏘️'
         ];
         const randomMessage = retryMessages[Math.floor(Math.random() * retryMessages.length)];
@@ -47,14 +47,15 @@ const handleAfilation = async (senderId, receivedMessage) => {
     console.log(`Estado actualizado a 'no_miembro_confirmacion'`);
 
     const info =
-        '🏢 *La Asociación Mexicana de Profesionales Inmobiliarios (AMPI)* es el organismo más grande del sector inmobiliario en México, con más de *7,000 miembros* 👥🌎\n\n' +
-        '✨ *¿Qué beneficios tienes al afiliarte?*\n' +
-        '📚 • Capacitación continua y especializada 🎓\n' +
-        '🎟️ • Acceso a eventos nacionales exclusivos 🧑‍💼🤝\n' +
-        '💼 • Oportunidades de negocio y networking 🧩\n' +
-        '🛡️ • Descuentos en seguros y servicios 📉\n' +
-        '💰 • Acceso a capital de trabajo y herramientas financieras 💳\n\n' +
-        '🤝 *Fortalecemos tu red profesional y la confianza en el sector inmobiliario.* 🏡🔑';
+        '🏛️ *La Cámara Nacional de Comercio (CANACO)* es una de las organizaciones empresariales más importantes de México, con miles de afiliados en todo el país. 📈🇲🇽\n\n' +
+        '✨ *¿Qué beneficios obtienes al afiliarte?*\n' +
+        '📚 • Asesoría legal, fiscal y administrativa especializada ⚖️📊\n' +
+        '🎟️ • Participación en eventos, ferias y exposiciones comerciales 🤝🧑‍💼\n' +
+        '💼 • Promoción de tu negocio en redes y directorios empresariales 🌐📣\n' +
+        '🏷️ • Acceso a convenios y descuentos con empresas e instituciones 💡🛒\n' +
+        '💰 • Capacitación y herramientas para el crecimiento de tu empresa 📘🚀\n\n' +
+        '🤝 *Impulsamos tu empresa, fortalecemos tu presencia y representamos tus intereses ante autoridades.* 🏬✅';
+
 
     await sendMessage(senderId, info);
 

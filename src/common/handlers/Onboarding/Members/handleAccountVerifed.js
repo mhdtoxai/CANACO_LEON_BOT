@@ -49,7 +49,7 @@ const handleAccountVerified = async (senderId) => {
     console.log(`✅ Información de membresía enviada a ${senderId}`);
 
     // 💬 Mensaje adicional
-    const additionalMessage = `🚀 *La nueva era tecnológica de AMPI ha llegado.*\n\n` +
+    const additionalMessage = `🚀 *La nueva era tecnológica de CANACO LEÓN ha llegado.*\n\n` +
       `Por este medio puedes:\n\n` +
       `• 💳 Pagar tu membresía y facturarla en SADAM\n` +
       `• 📄 Descargar tu constancia\n` +
@@ -57,7 +57,7 @@ const handleAccountVerified = async (senderId) => {
       `• 🎓 Registrarte y pagar cursos de capacitación\n` +
       `• 🎁 Conocer tus beneficios\n` +
       `• 📅 Registrarte y pagar eventos nacionales\n` +
-      `• 📰 Noticias de AMPI y el sector\n` +
+      `• 📰 Noticias de CANACO LEÓN y el sector\n` +
       `• ⚙️ Gestionar datos de tu perfil\n\n` +
       `*¿Por dónde quieres empezar?*`;
 

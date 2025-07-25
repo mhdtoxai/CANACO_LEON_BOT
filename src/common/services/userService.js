@@ -1,16 +1,26 @@
 const db = require('../database/mongoConfig');
 
-exports.getUser = async (senderId) => {
-    return await db.collection("users").findOne({ _id: senderId });
-};
+// ID de organización obtenido desde variable de entorno
+const ORGANIZATION_ID = process.env.ORGANIZATION_ID;
 
-exports.createUser = async (senderId) => {
-    return await db.collection("users").insertOne({
-        _id: senderId, 
-        state: 'bienvenida' 
+exports.getUser = async (wa_id) => {
+    return await db.collection("users").findOne({
+        wa_id,
+        organization_id: ORGANIZATION_ID
     });
 };
 
-exports.updateUser = async (senderId, data) => {
-    return await db.collection("users").updateOne({ _id: senderId }, { $set: data });
+exports.createUser = async (wa_id) => {
+    return await db.collection("users").insertOne({
+        wa_id,
+        organization_id: ORGANIZATION_ID,
+        state: 'bienvenida'
+    });
 };
+
+exports.updateUser = async (wa_id, data) => {
+    return await db.collection("users").updateOne(
+        { wa_id, organization_id: ORGANIZATION_ID },
+        { $set: data }
+    );
+}; 

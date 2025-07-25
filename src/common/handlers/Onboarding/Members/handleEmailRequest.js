@@ -14,7 +14,7 @@ const handleEmailRequest = async (senderId, receivedMessage) => {
 
     // 📌 Si ya intentó 2 veces
     if (email_attempts >= 2) {
-        await sendMessage(senderId, '🔍 No logro encontrar tu correo en mis registros.\n📞 Por favor comunícate con AMPI con la ejecutiva: Jeimy Esmeralda Galindo Rosas al *+52 1 56 1509 6289*.\n✅ Te ayudaremos a confirmar tu correo para que puedas acceder al asistente inteligente 🤖.');
+        await sendMessage(senderId, '🔍 No logro encontrar tu correo en mis registros.\n📞 Por favor comunícate con nuestros ejecutivos de CANACO León vía whatsapp al +524777142800 para atender tu caso.✅ \n✅ Te ayudaremos a confirmar tu correo para que puedas acceder al asistente inteligente 🤖.');
         await handleReset(senderId);
         return;
     }
@@ -53,7 +53,7 @@ const handleEmailRequest = async (senderId, receivedMessage) => {
         const updatedUserInfo = await getUserInfo(senderId);
         console.log('Intentos fallidos después de la actualización:', updatedUserInfo.email_attempts);
 
-        await sendMessage(senderId, '❌ El correo proporcionado no está registrado en AMPI.\n📧 Por favor, intenta con otro correo válido.');
+        await sendMessage(senderId, '❌ El correo proporcionado no está registrado en CANACO LEÓN.\n📧 Por favor, intenta con otro correo válido.');
         return;
     }
 

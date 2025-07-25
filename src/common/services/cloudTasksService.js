@@ -8,9 +8,9 @@ const client = new CloudTasksClient({ credentials });
 
 // Configuración de Google Cloud Tasks
 const project = 'dtox-ai-a6f48';
-const queue = 'AMPIUsers';
+const queue = 'Wechamber';
 const location = 'us-central1';
-const serviceUrl = 'https://ampi-jhsby.ondigitalocean.app/api/runTask';
+const serviceUrl = 'https://canaco-leon-umihv.ondigitalocean.app/api/runTask';
 
 // Función para programar una tarea en Google Cloud Tasks
 const scheduleTask = async (payload, dateTime, taskName) => {

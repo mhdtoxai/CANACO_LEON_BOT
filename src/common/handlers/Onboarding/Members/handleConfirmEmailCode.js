@@ -21,7 +21,7 @@ const handleConfirmEmailCode = async (senderId, receivedMessage) => {
 
   // ❌ Si ya intentó una vez antes (y vuelve a fallar)
   if (verified_email_code >= 1) {
-    await sendMessageTarget(senderId, 'No te preocupes, nadie se queda fuera. ✨ Te sugiero que te pongas en contacto directamente con AMPI a través de su teléfono 📞 55 55664260 o envíes un correo a 📧 ampi@ampi.org para revisar qué ocurre con tu correo electrónico, quizás necesites usar otro. 💡');
+    await sendMessageTarget(senderId, 'No te preocupes, nadie se queda fuera. ✨ Te sugiero que te pongas en contacto directamente con CANACO LEÓN a través de su teléfono 📞+524777142800 o envíes un correo a 📧 informacion@canacoleon.com para revisar qué ocurre con tu correo electrónico, quizás necesites usar otro. 💡');
     await handleReset(senderId);
     return;
   }

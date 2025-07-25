@@ -34,7 +34,7 @@ const handleUserByState = async (senderId, receivedMessage) => {
     await userService.createUser(senderId);
 
     // Enviar mensaje normal antes de la tarjeta
-    await sendMessage(senderId, '👋 ¡Hola! Soy el asistente inteligente de AMPI 🤖. Estoy aquí para ayudarte en lo que necesites. 💬✨');
+    await sendMessage(senderId, '👋 ¡Hola! Soy el asistente inteligente de CANACO LEÓN 🤖. Estoy aquí para ayudarte en lo que necesites. 💬✨');
 
      const buttons = [
       { id: 'si', title: 'Sí' },
@@ -44,7 +44,7 @@ const handleUserByState = async (senderId, receivedMessage) => {
 
 
     // Enviar tarjeta con la pregunta modificada
-    await sendMessageTarget(senderId, '🤝 Para comenzar, ¿me puedes indicar si ya eres miembro de AMPI? 🏢', buttons);
+    await sendMessageTarget(senderId, '🤝 Para comenzar, ¿me puedes indicar si ya eres miembro de CANACO LEÓN? 🏢', buttons);
 
   } else {
     const estado = userDoc.state;
