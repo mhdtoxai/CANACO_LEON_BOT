@@ -2,7 +2,7 @@
 const axios = require('axios');
 const sendMessage = require('../../services/Wp-Envio-Msj/sendMessage');
 const userService = require('../../services/userService');
-const verifyUserStatus  = require('./verifyActiveMembership');
+const verifyUserStatus = require('./verifyActiveMembership');
 const processApiAction = require('./processApiAction');
 
 const LLM = async (senderId, receivedMessage) => {
@@ -13,8 +13,8 @@ const LLM = async (senderId, receivedMessage) => {
   }
 
   // const estadoUsuario = userDoc.state;
-  const userId = userDoc.userId;
-  const member = userDoc.member;
+  const { userId, member, organization_id } = userDoc;
+
 
   // const estadosExcluidos = [
   //   'bienvenida',
@@ -36,13 +36,15 @@ const LLM = async (senderId, receivedMessage) => {
   //   return false;
   // }
 
-  const url = 'https://api-ampi.saptiva.com/ampi';
+  const url = 'https://llm-c4uot.ondigitalocean.app/canaco';
+
   const token = process.env.AMPI_API_TOKEN;
 
   const body = {
     from: senderId,
     query: receivedMessage,
     member: member,
+    organization_id
   };
 
   try {
@@ -56,13 +58,13 @@ const LLM = async (senderId, receivedMessage) => {
     const apiResponse = response.data;
 
     // 💬 Siempre enviamos la respuesta del LLM (si existe)
-    if (apiResponse.response) {
-      console.log('Respuesta de la API Olya:', apiResponse.response);
+    if (apiResponse?.response) {
+      console.log('Respuesta de la API LLM:', apiResponse.response);
       await sendMessage(senderId, apiResponse.response);
     }
 
     // ⚠️ Solo si hay acción, verificamos si el usuario está activo
-    if (apiResponse.action) {
+    if (apiResponse?.action) {
       console.log(`Acción detectada: ${apiResponse.action}`);
       const isActive = await verifyUserStatus(userId, senderId);
 
@@ -76,7 +78,7 @@ const LLM = async (senderId, receivedMessage) => {
 
     return true;
   } catch (error) {
-    console.error('Error al llamar a la API:', error);
+    console.error('❌ Error al llamar a la API de LLM:', error.response?.data || error.message);
     return false;
   }
 };
