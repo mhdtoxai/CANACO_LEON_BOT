@@ -38,7 +38,7 @@ const LLM = async (senderId, receivedMessage) => {
 
   const url = 'https://llm-c4uot.ondigitalocean.app/canaco';
 
-  const token = process.env.API_TOKEN;
+  const token = process.env.API_TOKEN_LLM;
 
   const body = {
     from: senderId,
