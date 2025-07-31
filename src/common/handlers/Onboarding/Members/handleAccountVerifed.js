@@ -49,7 +49,6 @@ const handleAccountVerified = async (senderId) => {
       `🔹 *Miembro:* ${name}\n` +
       `🏢 *Organización:* ${organization}\n` +
       // `📍 *Sección/Delegación/Capítulo:* ${branch}\n` +
-      `${statusEmoji} *Estatus:* ${statusText}\n\n`
         `Por favor verifica que tu información sea correcta. Si tienes algún cambio, puedes acceder a ${shortUrl} para actualizarla.`;
 
     await sendMessage(senderId, membershipMessage);

@@ -42,10 +42,8 @@ const sendEnableDirectoryMessage = async (senderId, userId) => {
 
   const botResponse = `🔑 Para darte acceso a tu credencial, necesitas habilitar la opción de ser *visible en el directorio*. Aquí tienes los pasos:
 
-1️⃣ Ingresa a tu perfil > Apartado de *editar tu perfil de miembro*, ve a la pestaña de *DATOS DEL DIRECTORIO*:  
-${shortUrl}
+  1️⃣ Ingresa a tu perfil > Apartado de *editar tu perfil de miembro*, ve a la pestaña de *DATOS DEL DIRECTORIO*:  ${shortUrl}
 
-  
   2️⃣ Datos de directorio > Activar switch *"Ser visible en el directorio"*.
 
   🖼️ Para poder visualizar tu *foto de perfil*, activa el switch *"Usar datos de miembro titular"* dentro del mismo apartado o selecciona la fotografía o el logotipo que deseas que aparezca.
