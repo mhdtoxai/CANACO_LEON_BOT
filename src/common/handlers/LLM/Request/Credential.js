@@ -35,7 +35,8 @@ const sendCredentialAvailableMessage = async (senderId, userId) => {
 };
 
 // Función que envía el mensaje para habilitar la visibilidad de la credencial
-const sendEnableDirectoryMessage = async (senderId) => {
+const sendEnableDirectoryMessage = async (senderId, userId) => {  
+
   const profileUrl = await getPersonalInfo(userId);
   const shortUrl = await shortenUrl(profileUrl);
 
