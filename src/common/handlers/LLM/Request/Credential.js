@@ -2,6 +2,9 @@
 const axios = require('axios');
 const sendMessage = require('../../../services/Wp-Envio-Msj/sendMessage');
 const sendImageMessage = require('../../../services/Wp-Envio-Msj/sendImageMessage');
+const { getPersonalInfo } = require('./PersonalInfo');
+const shortenUrl = require('../../../../api/shortenUrl');
+
 // 🔹 Obtenemos valores desde .env
 const DIRECTORY_API_URL = process.env.DIRECTORY_API_URL;
 const CREDENTIAL_BASE_URL = process.env.CREDENTIAL_BASE_URL;
@@ -9,7 +12,7 @@ const CREDENTIAL_BASE_URL = process.env.CREDENTIAL_BASE_URL;
 // 🔹 Función que verifica si la credencial está visible
 const checkCredentialVisibility = async (userId) => {
   const url = `${DIRECTORY_API_URL}?userId=${userId}`;
-  
+
   try {
     const response = await axios.get(url);
     return response.data.credentialVisible;  // Retorna el estado de la credencial
@@ -23,31 +26,36 @@ const checkCredentialVisibility = async (userId) => {
 const sendCredentialAvailableMessage = async (senderId, userId) => {
   const credentialUrl = `${CREDENTIAL_BASE_URL}${userId}`;
   const botResponse = `🎉 **¡Tu credencial está lista!** 🎉\n\n`
-    +`🔑 Puedes verla a detalle aquí: \n\n` 
-    +`👉 ${credentialUrl}\n\n` 
-    +`⚠️Por seguridad: no compartas esta liga, es únicamente para tu uso.\n\n`
-    +`Si tienes alguna otra pregunta o necesitas ayuda, ¡no dudes en decírmelo! 😊💬`;
+    + `🔑 Puedes verla a detalle aquí: \n\n`
+    + `👉 ${credentialUrl}\n\n`
+    + `⚠️Por seguridad: no compartas esta liga, es únicamente para tu uso.\n\n`
+    + `Si tienes alguna otra pregunta o necesitas ayuda, ¡no dudes en decírmelo! 😊💬`;
 
   await sendMessage(senderId, botResponse);
 };
 
 // Función que envía el mensaje para habilitar la visibilidad de la credencial
 const sendEnableDirectoryMessage = async (senderId) => {
+  const profileUrl = await getPersonalInfo(userId);
+  const shortUrl = await shortenUrl(profileUrl);
+
   const botResponse = `🔑 Para darte acceso a tu credencial, necesitas habilitar la opción de ser *visible en el directorio*. Aquí tienes los pasos:
 
-  1️⃣ *Ingresa a tu perfil* > Apartado de *editar tu perfil de miembro*.
-     
-  2️⃣ *Datos de directorio* > Activar switch *"Ser visible en el directorio"*.
-    
+1️⃣ Ingresa a tu perfil > Apartado de *editar tu perfil de miembro*, ve a la pestaña de *DATOS DEL DIRECTORIO*:  
+${shortUrl}
+
+  
+  2️⃣ Datos de directorio > Activar switch *"Ser visible en el directorio"*.
+
+  🖼️ Para poder visualizar tu *foto de perfil*, activa el switch *"Usar datos de miembro titular"* dentro del mismo apartado o selecciona la fotografía o el logotipo que deseas que aparezca.
+
   3️⃣ *Actívalo* > Asegúrate de que esté activado y *guarda los cambios*.
-  
-  🖼️ Además, para poder visualizar tu *foto de perfil*, activa el switch *"Usar datos de miembro titular"* dentro del mismo apartado.
-  
+
   ✅ *Cuando lo tengas listo, vuelve a solicitarme tu credencial* 🙌`;
-  
-  
+
   await sendMessage(senderId, botResponse);
 };
+
 
 // Función que envía la imagen para ayudar al usuario
 const sendDirectoryImage = async (senderId) => {
@@ -67,7 +75,7 @@ const enableDirectoryForUser = async (userId, senderId) => {
 
   // Verificamos si la credencial está visible
   const credentialVisible = await checkCredentialVisibility(userId);
-  
+
   if (credentialVisible) {
     // Si está visible, enviamos el mensaje con la credencial
     await sendCredentialAvailableMessage(senderId, userId);

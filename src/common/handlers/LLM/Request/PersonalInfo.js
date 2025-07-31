@@ -47,4 +47,8 @@ const sendPersonalInfo = async (userId, senderId) => {
     await sendMessage(senderId, botResponse);
 };
 
-module.exports = sendPersonalInfo;
+
+module.exports = {
+    sendPersonalInfo,
+    getPersonalInfo
+};

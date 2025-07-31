@@ -1,7 +1,7 @@
 const axios = require('axios');
 const sendMessage = require('../../../services/Wp-Envio-Msj/sendMessage');
 const getUserInfo = require('../../../services/getUserInfo');
-const shortenUrl = require('../../../../api/shortenUrl'); 
+const shortenUrl = require('../../../../api/shortenUrl');
 
 const USER_RETRIEVE_URL = process.env.USER_RETRIEVE_URL;
 const PROFILE_API_URL = process.env.PROFILE_API_URL;
@@ -35,15 +35,22 @@ const handleAccountVerified = async (senderId) => {
     // ✅ Acortar URL
     const shortUrl = await shortenUrl(profileUrl);
 
-    // 📨 Mensaje con datos + shortURL
-    const statusEmoji = status === "ACTIVE" ? "✅" : "❌";
+
+    // ✅ Traducir "ACTIVE" si aparece
+    let statusEmoji = '';
+    let statusText = status;
+
+    if (status === 'ACTIVE') { statusEmoji = '✅'; statusText = 'Activo'; }
+    else if (status === 'INACTIVO') { statusEmoji = '❌'; }
+    else if (status === 'PROSPECTO') { statusEmoji = '🕓'; }
+
 
     const membershipMessage = `¡Bienvenido! A continuación te comparto los datos de tu membresía:\n\n` +
       `🔹 *Miembro:* ${name}\n` +
       `🏢 *Organización:* ${organization}\n` +
-      `📍 *Sección/Delegación/Capítulo:* ${branch}\n` +
-      `${statusEmoji} *Estatus:* ${status}\n\n` +
-      `Por favor verifica que tu información sea correcta. Si tienes algún cambio, puedes acceder a ${shortUrl} para actualizarla.`;
+      // `📍 *Sección/Delegación/Capítulo:* ${branch}\n` +
+      `${statusEmoji} *Estatus:* ${statusText}\n\n`
+        `Por favor verifica que tu información sea correcta. Si tienes algún cambio, puedes acceder a ${shortUrl} para actualizarla.`;
 
     await sendMessage(senderId, membershipMessage);
     console.log(`✅ Información de membresía enviada a ${senderId}`);
@@ -51,12 +58,12 @@ const handleAccountVerified = async (senderId) => {
     // 💬 Mensaje adicional
     const additionalMessage = `🚀 *La nueva era tecnológica de CANACO LEÓN ha llegado.*\n\n` +
       `Por este medio puedes:\n\n` +
-      `• 💳 Pagar tu membresía y facturarla en SADAM\n` +
+      `• 💳 Pagar tu membresía y facturarla\n` +
       `• 📄 Descargar tu constancia\n` +
       `• 🆔 Solicitar tu credencial virtual\n` +
       `• 🎓 Registrarte y pagar cursos de capacitación\n` +
       `• 🎁 Conocer tus beneficios\n` +
-      `• 📅 Registrarte y pagar eventos nacionales\n` +
+      `• 📅 Registrarte y pagar eventos\n` +
       `• 📰 Noticias de CANACO LEÓN y el sector\n` +
       `• ⚙️ Gestionar datos de tu perfil\n\n` +
       `*¿Por dónde quieres empezar?*`;
