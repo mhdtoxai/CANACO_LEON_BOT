@@ -2,7 +2,7 @@
 const axios = require('axios');
 const sendMessage = require('../../../services/Wp-Envio-Msj/sendMessage');
 const sendImageMessage = require('../../../services/Wp-Envio-Msj/sendImageMessage');
-const { getPersonalInfo } = require('./PersonalInfo');
+const  getPersonalInfo  = require('./PersonalInfo');
 const shortenUrl = require('../../../../api/shortenUrl');
 
 // 🔹 Obtenemos valores desde .env
