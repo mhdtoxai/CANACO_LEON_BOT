@@ -48,4 +48,4 @@ const sendPersonalInfo = async (userId, senderId) => {
 };
 
 
-module.exports = sendPersonalInfo,getPersonalInfo;
+module.exports = { sendPersonalInfo,getPersonalInfo };

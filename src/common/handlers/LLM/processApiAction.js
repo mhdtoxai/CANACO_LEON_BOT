@@ -1,7 +1,7 @@
 // services/processApiAction.js
 const enableDirectoryForUser = require('./Request/Credential');
 const sendMembershipPaymentLink = require('./Request/Membership');
-const sendPersonalInfo = require('./Request/PersonalInfo');
+const { sendPersonalInfo } = require('./Request/PersonalInfo');
 const sendEventsInfo = require('./Request/Events');
 const sendBenefitsInfo = require('./Request/Benefits');
 const sendCommunityInfo = require('./Request/Community');
