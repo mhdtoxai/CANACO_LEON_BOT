@@ -16,7 +16,6 @@ const LLM = async (senderId, receivedMessage) => {
   const body = {
     from: senderId,
     query: receivedMessage,
-    member,
     organization_id,
   };
 
