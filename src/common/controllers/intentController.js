@@ -46,23 +46,12 @@ Acciones válidas y sus mensajes asociados:
     "action": "informacion_beneficios"
   }
 
-- informacion_comunidad
+- informacion_comunidad /  informacion_noticias / informacion_informes
   {
-    "mensaje": "Aquí tienes la información de las comunidades...",
+    "mensaje": "Aquí tienes la información de las comunidades/noticias/informes...",
     "action": "informacion_comunidad"
   }
 
-- informacion_noticias
-  {
-    "mensaje": "Aquí tienes la información de las noticias...",
-    "action": "informacion_comunidad"
-  }
-
-- informacion_informes
-  {
-    "mensaje": "Aquí tienes la información de los informes...",
-    "action": "informacion_comunidad"
-  }
 
 - constancia_miembro
   {
