@@ -24,37 +24,37 @@ const LLM = async (senderId, receivedMessage) => {
   const intentUrl = 'https://canaco-leon-umihv.ondigitalocean.app/api/intent';
   const token = process.env.API_TOKEN_LLM;
 
-  // ✅ Función para llamar a la LLM y procesar su respuesta
   const callLLM = async () => {
-    const llmResponse = await axios.post(llmUrl, body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
+  const llmResponse = await axios.post(llmUrl, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
-    const apiResponse = llmResponse.data;
+  const apiResponse = llmResponse.data;
 
-    if (apiResponse?.response) {
-      let responseText = apiResponse.response.trim();
-      if (responseText.startsWith('ASSISTANT:')) {
-        responseText = responseText.slice('ASSISTANT:'.length).trim();
-      }
+  if (apiResponse?.response) {
+    let responseText = apiResponse.response.trim();
 
-      console.log('Respuesta limpia de la API LLM:', responseText);
-      await sendMessage(senderId, responseText);
+    // ✅ Limpieza más robusta del prefijo "assistant"
+    responseText = responseText.replace(/^assistant[:\s-]*?/i, '').trim();
+
+    console.log('Respuesta limpia de la API LLM:', responseText);
+    await sendMessage(senderId, responseText);
+  }
+
+  if (apiResponse?.action) {
+    console.log(`Acción detectada: ${apiResponse.action}`);
+    const isActive = await verifyUserStatus(userId, senderId);
+    if (isActive) {
+      await processApiAction(apiResponse.action, userId, senderId);
+    } else {
+      console.log(`Usuario ${userId} no está activo. No se ejecuta la acción.`);
     }
+  }
+};
 
-    if (apiResponse?.action) {
-      console.log(`Acción detectada: ${apiResponse.action}`);
-      const isActive = await verifyUserStatus(userId, senderId);
-      if (isActive) {
-        await processApiAction(apiResponse.action, userId, senderId);
-      } else {
-        console.log(`Usuario ${userId} no está activo. No se ejecuta la acción.`);
-      }
-    }
-  };
 
   try {
     // 🔍 Si es miembro, primero clasificamos con /intent
