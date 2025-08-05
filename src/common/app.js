@@ -4,6 +4,7 @@ const webhookRoutes = require('./routes/webhookRoutes');
 // const webhookStripe  = require('./routes/webhookStripe');
 const taskRoutes = require('./routes/taskRoutes');
 const backupRoutes = require('./routes/backupRoutes');
+const intentRouter = require("./routes/intentRouter");
 const cors = require('cors');
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/meta/webhook', webhookRoutes);
 app.use('/api', taskRoutes);
 app.use('/api', backupRoutes);
+app.use("/api", intentRouter); 
 module.exports = app;
 
