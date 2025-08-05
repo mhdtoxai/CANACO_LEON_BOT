@@ -21,11 +21,43 @@ const LLM = async (senderId, receivedMessage) => {
   };
 
   const llmUrl = 'https://llm-c4uot.ondigitalocean.app/canaco/';
-  const intentUrl ='https://canaco-leon-umihv.ondigitalocean.app/api/intent';
+  const intentUrl = 'https://canaco-leon-umihv.ondigitalocean.app/api/intent';
   const token = process.env.API_TOKEN_LLM;
 
+  // ✅ Función para llamar a la LLM y procesar su respuesta
+  const callLLM = async () => {
+    const llmResponse = await axios.post(llmUrl, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const apiResponse = llmResponse.data;
+
+    if (apiResponse?.response) {
+      let responseText = apiResponse.response.trim();
+      if (responseText.startsWith('ASSISTANT:')) {
+        responseText = responseText.slice('ASSISTANT:'.length).trim();
+      }
+
+      console.log('Respuesta limpia de la API LLM:', responseText);
+      await sendMessage(senderId, responseText);
+    }
+
+    if (apiResponse?.action) {
+      console.log(`Acción detectada: ${apiResponse.action}`);
+      const isActive = await verifyUserStatus(userId, senderId);
+      if (isActive) {
+        await processApiAction(apiResponse.action, userId, senderId);
+      } else {
+        console.log(`Usuario ${userId} no está activo. No se ejecuta la acción.`);
+      }
+    }
+  };
+
   try {
-    // Si es miembro, primero mandamos a /api/intent
+    // 🔍 Si es miembro, primero clasificamos con /intent
     if (member) {
       const intentResponse = await axios.post(intentUrl, body, {
         headers: {
@@ -37,33 +69,8 @@ const LLM = async (senderId, receivedMessage) => {
       console.log('Respuesta de /api/intent:', intentData);
 
       if (intentData?.action === 'pregunta_general') {
-        // Si es una pregunta general, mandamos a la LLM normal
-        const llmResponse = await axios.post(llmUrl, body, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        const apiResponse = llmResponse.data;
-
-        if (apiResponse?.response) {
-          console.log('Respuesta de la API LLM:', apiResponse.response);
-          await sendMessage(senderId, apiResponse.response);
-        }
-
-        if (apiResponse?.action) {
-          console.log(`Acción detectada: ${apiResponse.action}`);
-          const isActive = await verifyUserStatus(userId, senderId);
-          if (isActive) {
-            await processApiAction(apiResponse.action, userId, senderId);
-          } else {
-            console.log(`Usuario ${userId} no está activo. No se ejecuta la acción.`);
-          }
-        }
-
+        await callLLM(); // 🧠 Pregunta informativa → llamar a LLM
       } else {
-        // Si no es pregunta general, procesamos la acción directamente
         const isActive = await verifyUserStatus(userId, senderId);
         if (isActive) {
           await processApiAction(intentData.action, userId, senderId);
@@ -73,33 +80,12 @@ const LLM = async (senderId, receivedMessage) => {
       }
 
     } else {
-      // Si no es miembro, mandamos directamente a la LLM
-      const llmResponse = await axios.post(llmUrl, body, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const apiResponse = llmResponse.data;
-
-      if (apiResponse?.response) {
-        console.log('Respuesta de la API LLM:', apiResponse.response);
-        await sendMessage(senderId, apiResponse.response);
-      }
-
-      if (apiResponse?.action) {
-        console.log(`Acción detectada: ${apiResponse.action}`);
-        const isActive = await verifyUserStatus(userId, senderId);
-        if (isActive) {
-          await processApiAction(apiResponse.action, userId, senderId);
-        } else {
-          console.log(`Usuario ${userId} no está activo. No se ejecuta la acción.`);
-        }
-      }
+      // 🔓 No miembro → ir directo a LLM
+      await callLLM();
     }
 
     return true;
+
   } catch (error) {
     console.error('❌ Error en el proceso de LLM:', error.response?.data || error.message);
     return false;
