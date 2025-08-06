@@ -22,7 +22,7 @@ Acciones válidas y sus mensajes asociados:
     "action": "crear_credenciales"
   }
 
-- solicitud_eventos
+- solicitud_eventos / capacitaciones / cursos
   {
     "mensaje": "Un momento, estoy generando solicitud_eventos.",
     "action": "solicitud_eventos"
@@ -73,6 +73,9 @@ Ejemplos de frases personales (activan acción):
 - "qué beneficios tengo"
 - "dame mi constancia"
 - "quiero saber de mi comunidad"
+- "quiero saber de mis cursos"
+- "quiero ver mis capacitaciones"
+
 
 Ejemplos generales (responder con pregunta_general):
 
