@@ -1,5 +1,6 @@
 const axios = require('axios');
 const sendMessage = require('../../../services/Wp-Envio-Msj/sendMessage');
+const sendContactMessage = require('../../../services/Wp-Envio-Msj/sendMessageTarget');
 const getUserInfo = require('../../../services/getUserInfo');
 const shortenUrl = require('../../../../api/shortenUrl');
 
@@ -49,7 +50,7 @@ const handleAccountVerified = async (senderId) => {
       `🔹 *Miembro:* ${name}\n` +
       `🏢 *Organización:* ${organization}\n` +
       // `📍 *Sección/Delegación/Capítulo:* ${branch}\n` +
-        `Por favor verifica que tu información sea correcta. Si tienes algún cambio, puedes acceder a ${shortUrl} para actualizarla.`;
+      `Por favor verifica que tu información sea correcta. Si tienes algún cambio, puedes acceder a ${shortUrl} para actualizarla.`;
 
     await sendMessage(senderId, membershipMessage);
     console.log(`✅ Información de membresía enviada a ${senderId}`);
@@ -69,6 +70,20 @@ const handleAccountVerified = async (senderId) => {
 
     await sendMessage(senderId, additionalMessage);
     console.log(`✅ Mensaje sobre nuevas funciones enviado a ${senderId}`);
+
+
+    // 📇 Mensaje para tarjeta de contacto
+    const contactNote = '📇✨ ¡No olvides guardarme entre tus contactos! 📱💾 Puedes guardarme como “Mi Asistente CANACO” 🛎️ para que siempre me encuentres con facilidad. 🔍🤝';
+
+    await sendContactMessage(senderId, contactNote);
+    console.log(`✅ Tarjeta de contacto enviada a ${senderId}`);
+
+    await sendContactMessage(
+      senderId,
+      'Mi Asistente CANACO',
+      '¡No olvides guardarme entre tus contactos! Puedes guardarme como “Mi Asistente CANACO” para que siempre me encuentres con facilidad.'
+    );
+    console.log(`✅ Tarjeta de contacto enviada a ${senderId}`);
 
   } catch (error) {
     const errorMessage = error.response?.data || error.message;

@@ -5,8 +5,8 @@ const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
 const contactData = {
   name: {
-    formatted_name: "AMPI",
-    first_name: "AMPI"
+    formatted_name: "Mi Asistente CANACO",
+    first_name: "Mi Asistente CANACO"
   },
   org: {
     company: "Empresa",
@@ -14,20 +14,20 @@ const contactData = {
   },
   phones: [
     {
-      phone: "+5214772912824",
+      phone: "+5214771085473",
       type: "CELL",
-      wa_id: "5214772912824"
+      wa_id: "5214771085473"
     }
   ],
   emails: [
     {
-      email: "ampi@ampi",
+      email: "informacion@canacoleon.org",
       type: "WORK"
     }
   ],
   urls: [
     {
-      url: "https://ampi.org/",
+      url: "https://www.canacoleon.com/",
       type: "WORK"
     }
   ]
