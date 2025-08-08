@@ -74,16 +74,11 @@ const handleAccountVerified = async (senderId) => {
 
     // 📇 Mensaje para tarjeta de contacto
     const contactNote = '📇✨ ¡No olvides guardarme entre tus contactos! 📱💾 Puedes guardarme como “Mi Asistente CANACO” 🛎️ para que siempre me encuentres con facilidad. 🔍🤝';
+    await sendMessage(senderId, contactNote);
 
-    await sendContactMessage(senderId, contactNote);
+    await sendContactMessage(senderId);
     console.log(`✅ Tarjeta de contacto enviada a ${senderId}`);
 
-    await sendContactMessage(
-      senderId,
-      'Mi Asistente CANACO',
-      '¡No olvides guardarme entre tus contactos! Puedes guardarme como “Mi Asistente CANACO” para que siempre me encuentres con facilidad.'
-    );
-    console.log(`✅ Tarjeta de contacto enviada a ${senderId}`);
 
   } catch (error) {
     const errorMessage = error.response?.data || error.message;
