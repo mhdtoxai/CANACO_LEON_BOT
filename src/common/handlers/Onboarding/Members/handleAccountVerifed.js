@@ -1,6 +1,6 @@
 const axios = require('axios');
 const sendMessage = require('../../../services/Wp-Envio-Msj/sendMessage');
-const sendContactMessage = require('../../../services/Wp-Envio-Msj/sendMessageTarget');
+const sendContactMessage = require('../../../services/Wp-Envio-Msj/sendContactMessage');
 const getUserInfo = require('../../../services/getUserInfo');
 const shortenUrl = require('../../../../api/shortenUrl');
 
