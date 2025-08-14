@@ -12,13 +12,6 @@ const handleEmailRequest = async (senderId, receivedMessage) => {
     const userInfo = await getUserInfo(senderId);
     let { email_attempts } = userInfo;
 
-    // 📌 Si ya intentó 2 veces
-    if (email_attempts >= 1) {
-        await sendMessage(senderId, '🔍 No logro encontrar tu correo en mis registros.\n📞 Por favor comunícate con nuestros ejecutivos de CANACO León vía whatsapp al +524777142800 para atender tu caso.✅ \n✅ Te ayudaremos a confirmar tu correo para que puedas acceder al asistente inteligente 🤖.');
-        await handleReset(senderId);
-        return;
-    }
-
     // 📧 Validar correo con regex simple
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -53,7 +46,15 @@ const handleEmailRequest = async (senderId, receivedMessage) => {
         const updatedUserInfo = await getUserInfo(senderId);
         console.log('Intentos fallidos después de la actualización:', updatedUserInfo.email_attempts);
 
-        await sendMessage(senderId, '❌ El correo proporcionado no está registrado en CANACO LEÓN.\n📧 Por favor, intenta con otro correo válido.');
+        if (updatedUserInfo.email_attempts >= 2) {
+            // Tercer intento fallido: redirigir a contacto
+            await sendMessage(senderId, '🔍 No logro encontrar tu correo en mis registros.\n📞 Por favor comunícate con nuestros ejecutivos de CANACO León vía WhatsApp al +52 477 714 2800 para atender tu caso.✅\n✅ Te ayudaremos a confirmar tu correo para que puedas acceder al asistente inteligente 🤖.');
+            await handleReset(senderId);
+        } else {
+            // Primer o segundo intento fallido
+            await sendMessage(senderId, '❌ El correo proporcionado no está registrado en CANACO LEÓN.\n📧 Por favor, intenta con otro correo válido.');
+        }
+
         return;
     }
 
