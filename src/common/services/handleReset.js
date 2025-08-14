@@ -6,7 +6,7 @@ const ORGANIZATION_ID = process.env.ORGANIZATION_ID;
 
 async function handleReset(senderId) {
   try {
-const resetMessage = '¡Todo listo para volver a empezar! Cuando estés listo, solo mándame un mensaje y comenzamos desde el principio. 😊';
+const resetMessage = 'Cuando estés listo, solo mándame un mensaje y comenzamos desde el principio. 😊';
     await sendMessage(senderId, resetMessage);
 
     await new Promise(resolve => setTimeout(resolve, 500));
