@@ -13,7 +13,7 @@ const handleEmailRequest = async (senderId, receivedMessage) => {
     let { email_attempts } = userInfo;
 
     // 📌 Si ya intentó 2 veces
-    if (email_attempts >= 2) {
+    if (email_attempts >= 1) {
         await sendMessage(senderId, '🔍 No logro encontrar tu correo en mis registros.\n📞 Por favor comunícate con nuestros ejecutivos de CANACO León vía whatsapp al +524777142800 para atender tu caso.✅ \n✅ Te ayudaremos a confirmar tu correo para que puedas acceder al asistente inteligente 🤖.');
         await handleReset(senderId);
         return;

@@ -47,14 +47,18 @@ const handleAfilation = async (senderId, receivedMessage) => {
     console.log(`Estado actualizado a 'no_miembro_confirmacion'`);
 
     const info =
-        '🏛️ *La Cámara Nacional de Comercio (CANACO)* es una de las organizaciones empresariales más importantes de México, con miles de afiliados en todo el país. 📈🇲🇽\n\n' +
-        '✨ *¿Qué beneficios obtienes al afiliarte?*\n' +
-        '📚 • Asesoría legal, fiscal y administrativa especializada ⚖️📊\n' +
-        '🎟️ • Participación en eventos, ferias y exposiciones comerciales 🤝🧑‍💼\n' +
-        '💼 • Promoción de tu negocio en redes y directorios empresariales 🌐📣\n' +
-        '🏷️ • Acceso a convenios y descuentos con empresas e instituciones 💡🛒\n' +
-        '💰 • Capacitación y herramientas para el crecimiento de tu empresa 📘🚀\n\n' +
-        '🤝 *Impulsamos tu empresa, fortalecemos tu presencia y representamos tus intereses ante autoridades.* 🏬✅';
+  '🏛️ *La Cámara Nacional de Comercio (CANACO)* es una de las organizaciones empresariales más importantes de México, con miles de afiliados en todo el país. 📈🇲🇽\n\n' +
+  '✨ *¿Qué beneficios obtienes al afiliarte?*\n' +
+  '📚 • Asesoría legal, fiscal y administrativa especializada ⚖️📊\n' +
+  '🎟️ • Participación en eventos, ferias y exposiciones comerciales 🤝🧑‍💼\n' +
+  '💼 • Promoción de tu negocio en redes y directorios empresariales 🌐📣\n' +
+  '🏷️ • Acceso a convenios y descuentos con empresas e instituciones 💡🛒\n' +
+  '💰 • Capacitación y herramientas para el crecimiento de tu empresa 📘🚀\n\n' +
+  '🤝 *Impulsamos tu empresa, fortalecemos tu presencia y representamos tus intereses ante autoridades.* 🏬✅\n\n' +
+  '🔗 Para conocer los *eventos y cursos* de CANACO León visita:\n' +
+  '👉 https://wechamber.mx/micrositio-eventos/6500e21c80d167001bf44b63\n\n' +
+  '📇 También puedes explorar el *directorio de miembros* aquí:\n' +
+  '👉 https://wechamber.mx/micrositio-membership/6508be42f39fbc001bcf2d90?step=members\n\n';
 
 
     await sendMessage(senderId, info);
